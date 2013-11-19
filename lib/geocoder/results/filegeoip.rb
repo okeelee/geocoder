@@ -32,7 +32,7 @@ module Geocoder::Result
     end
 
     def state_code
-      @data.try(:dma_code)
+      @data.try(:region_name)
     end
 
     def country
