@@ -12,49 +12,43 @@ module Geocoder::Result
     # A two-element array: [lat, lon].
     #
     def coordinates
-      [@data.latitude, @data.latitude]
+      [@data.try(:latitude), @data.try(:longitude)]
     end
 
     def latitude
-      @data.latitude
+      @data.try(:latitude)
     end
 
     def longitude
-      @data.latitude
+      @data.try(:longitude)
     end
 
     def city
-      @data.city_name
+      @data.try(:city_name)
     end
 
     def state
-      @data.real_region_name
+      @data.try(:real_region_name)
     end
 
     def state_code
-      @data.dma_code
+      @data.try(:dma_code)
     end
 
     def country
-      @data.country_name
+      @data.try(:country_name)
     end
 
     def country_code
-      @data.country_code2
+      @data.try(:country_code2)
     end
 
     def postal_code
-      @data.postal_code
+      @data.try(:postal_code)
     end
 
-    def self.response_attributes
-      %w[metrocode ip]
-    end
-
-    response_attributes.each do |a|
-      define_method a do
-        @data[a]
-      end
+    def ip
+      @data.try(:ip)
     end
   end
 end
